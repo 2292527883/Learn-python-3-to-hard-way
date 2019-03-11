@@ -1,0 +1,99 @@
+到现在为止你学到了什么
+
+ex0:jupyter在服务器上的配置
+    创建 jupyter-coming文件 而不是在源文件上更改 更改无效
+      配置账户密码 端口
+    atom的安装,配置
+      安装python-run
+        文件-个性设置-安装
+    powershell 的使用:
+      pwd:打印当前工作目录
+      ls:打印当前文件夹列表
+      mkdir:创建新文件夹 可以mkdir 路径\路径\文件夹名 pwd ls rmdir New-item都可以使用该方法
+      rmdir:删除文件夹
+      cd:移动至路径 :cd: x\xx\xx\xx\
+      cd..:移动至上一层路径 cd ..\..\ 移动至第n层路径
+      mv:移动文件
+      cp:复制文件
+      pushd:记录当前路径
+      popd:回到pushd所记录的路径 (只能用一次)
+      more:查看文件内容
+      cat:以流文件查看(不用按回车继续查看)
+      退出终端:exit
+      退出pythonL:exit()
+ex1-12:打印
+  基本格式:print("")
+  注释 :# + 注释
+  数学计算:
+    c=a+b
+    print("c")#a+b的结果
+    可以将字符串赋值给变量
+      a="fuck you !"
+      print(a)
+    f函数可以替换打印中的占位符
+    例:a='mother'
+      print(f"I want to fuck you {a}")
+    转义符号 :\
+    在打印时有时需要打印""\''
+    但是打印格式限定了print("")
+    可以在需要打印的符号前加\
+    如print(" \' ")
+    其他转义符号:
+      \t TAB
+      \n 换行
+      ...
+  input():
+    可以获取用户输入
+    用法:
+      a=input()
+    在()加入""可以提示输入
+    如:
+      a=input("请输入:")
+      print(a)
+      如输入:fuck
+      打印结果为:
+        请输入:__
+        fuck
+
+ex13-17:参数,解包和变量:
+  函数:argv
+  在sys库中
+  单独使用:
+    form sys inport argv
+    用法:从外部获取参数
+    例:
+    from sys inport argv
+      script,a,b=argv #将argv获取到的参数解包,赋值给a,b两个变量 script为文件名\完整路径
+    从外部输入python ex22.py()script 1(a) 2(b)
+      print(a,b)
+      结果为:1,2
+  读写文件:(配合argv函数使用可以让用户决定打开哪个文件)
+  open=open(1.txt)#打开1.txt将内容赋值给open
+  print(open.read())#rede 函数读取 print打印改文件
+  修改文件内容
+  open(1.txt,'w')#以读写方式打开1.txt
+  a=open.read()
+  a.truncate#清空文件内容#如果你清楚文件内容 ,这部不是必须
+  line1=input("第一行")
+  line2=abcdefg
+  a.write(line1)#写入第一行,下同
+  a.write("\n")
+  a.write(line2)
+  a.cloes#关闭文件
+  或另一种方式:
+    a.write(line1+'\n'+line2)
+
+ex18-21 函数
+  关键字 :def
+  def:define  自定义函数 例:
+    def acctivt(mother,fuck)
+      print(f"you {mother} is {fuck} ! ")
+      a=1,b=2
+      c=a+b
+      return c #返回值
+    mother=input("you")
+    fuck=input("i")
+    print(c)
+    结果:You you is I
+
+    

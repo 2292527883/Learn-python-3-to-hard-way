@@ -1,0 +1,4 @@
+this is a ex txt
+if you can see
+you has been get read and open
+这是一个实验文件,用来测试乱码问题
