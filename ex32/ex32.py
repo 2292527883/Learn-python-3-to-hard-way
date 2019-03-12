@@ -12,12 +12,14 @@ for number in the_count:
 """some as avove"""
 
 for fruit in fruits:
+    # 定义一个fruit 循环在fruits列表中 因为fruits有4个元素 所以循环4次
     print(f"A fruit of tyre : {fruits}")
 
 # also we can go through mixed lists too
 # notice we have to use () since we dong;t know what's in it
 for i in change:
     print(f"I got {i}")
+    # 第i个元素
 
 # we can also build lists ,frist start with an empty one
 elements = []  # 定义elements为一个空列表
@@ -31,6 +33,7 @@ for i in range(0, 5):
     print(f"adding {i} to the list")
     # append is a funtion that lists understand
     elements.append(i)  # 向列表末尾添加元素
+    # 向elements列表中第i个元素赋值
 
 # now we can print them ot too
 print("I=", i)  # i是一个变量而不是列表,所以只会打印最后一个添加的值:I=4
