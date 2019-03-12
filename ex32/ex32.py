@@ -23,9 +23,10 @@ for i in change:
 elements = []  # 定义elements为一个空列表
 
 # then use the range function do 0 to 5 count
-for i in range(0, 5):  # range() 函数可创建一个整数列表，
-    # 一般用在 for 循环中。但是它不是一个真正意义上的列表,它只是在迭代的情况下返回指定索引
-    # 值，但是它并不会在内存中真正产生一个列表对象，这样也是为了节约内存空间
+for i in range(0, 5):
+    # range() 函数可创建一个整数列表，
+    # 一般用在 for 循环中。但是它不是一个真正意义上的列表,它只是在迭代的情况下返回指定索引值
+    # 但是它并不会在内存中真正产生一个列表对象，这样也是为了节约内存空间
     # range(0,5) :0,1,2,3,4 共五个数 range()函数会从第一个数到最后一个数名单不会包含最后一个数
     print(f"adding {i} to the list")
     # append is a funtion that lists understand
