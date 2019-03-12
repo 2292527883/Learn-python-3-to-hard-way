@@ -17,3 +17,5 @@ write = open(filename)
 print("下面是写入文件的内容:")
 
 print(write.read())
+print("测试 github用")
+print("6666666666666")
