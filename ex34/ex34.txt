@@ -1,0 +1,6 @@
+访问列表中的元素
+
+animals =['bear','tigers','pebguin']
+序数等于有序 从1 开始
+基数等于随机选取 从0开始
+bear 是animals列表中的第0个元素
