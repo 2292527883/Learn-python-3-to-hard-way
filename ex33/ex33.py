@@ -15,3 +15,22 @@ print("The numbers :")
 
 for num in numbers:
     print(num)
+
+count = input("count=")
+
+
+def numbers(count):
+    i = 0
+    count = int(count)
+    fuck = []
+    while i < count:
+        print(f"This top i is {i}")
+        you = input('>')
+        you = int(you)
+        fuck.append(you)
+        i = i + 1
+        print("fuck now is :", fuck)
+        print(f"Now i is : {i}")
+
+
+numbers(count)
