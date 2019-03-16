@@ -36,6 +36,10 @@ for word in urlopen(WORD_URL).readlines():
     # 向列表WORDS中添加以utf-8的格式字符串并在word中删除
     WORDS.append(str(word.strip(), encoding="utf-8"))
 
+# 大概功能:
+# 随机抽出key:面向对象的例子
+# 解释它的含义
+
 
 def convert(snippet, phrase):
     # capitalize:将w的字符串的首字母大写其他小写
