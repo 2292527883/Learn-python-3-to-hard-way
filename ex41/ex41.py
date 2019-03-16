@@ -6,22 +6,22 @@ WORD_URL = "https://learncodethehardway.org/words.txt"
 WORDS = []
 PHRASES = {  # 创建以一个叫phrase 的字典
     "class %%%(%%%):":  # 创建以一个叫%%%的类,他是%%%的一种
-    "MAKE A calss named %%% that is-a %%%",
-    "class %%%(object):\n\tdef_init_(selt,***)":
+    "创建一个叫 %%% 的类,他是 %%% 的一种",
+    "class %%%(object):\n\tdef_init_(self,***)":
     # 类%%%里有一个_init_,他接受selt,***作为参数
-    "class %%% has a _init_ that takes self and ***params",
-    "class %%%(object):\n\tdef ***(self.@@@)":
+    "类 %%% 有一个_init_ ,它接受 self和 *** 为函数",
+    "class %%%(object):\n\tdef ***(self,@@@)":
     # 类%%%有一个函数 *** ,它接受self和@@@为参数
-    "class %%% has a function *** that takes self and @@@ params",
+    "类 %%% 有一个函数 *** ,它接受 self 和 @@@ 为参数",
     "***=%%%()":
-    "set *** to an instance of class %%%",
+    "将 *** 设为 类 %%% 的一个实例",
     # 将***设置为类%%%的一个实例
     "***.***(@@@)":
     # 从 类***调取***函数,使用self和@@@调用它
-    "From *** get the *** function , call it with params self ,@@#",
+    "从类 *** 找到 *** 函数,并使用 self 和 @@@ 调用它",
     "***.***='***'":
     # 从 类***中获取 ***属性,并将其设为'***'
-    "From *** get the *** attribute and set it to '***'"
+    "从 *** 中获取 *** 属性,并将其设为 ' *** ' "
 }
 # do they want to drill phrases first
 # 判断:argv的需要的参数是否为两个,且第二个参数是否为'English',是则PHRASE_FIRST=True
@@ -62,6 +62,7 @@ def convert(snippet, phrase):
         result = sentence[:]
 
         # fake class class_names
+        # print("\n\n")
         for word in class_names:
             # replace() 方法把字符串中的 old（旧字符串） 替换成 new(新字符串)
             # 如果指定第三个参数max，则替换不超过 max 次。
@@ -94,6 +95,7 @@ try:
             phrase = PHRASES[snippet]
             question, answer = convert(snippet, phrase)
             print(snippet)
+            print("\n")
             if PHRASE_FIRST:
                 question, answer = answer, question
 
