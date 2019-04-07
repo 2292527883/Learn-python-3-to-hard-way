@@ -1,4 +1,4 @@
-# 对象,类及丛书关系
+# 对象,类及从属关系
 
 # Animal is-a object (yes, sort of confusing ) look at the extra credit
 

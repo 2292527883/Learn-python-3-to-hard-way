@@ -19,7 +19,7 @@ for num in numbers:
 count = input("count=")
 
 
-def numbers(count):
+def number(count):
     i = 0
     count = int(count)
     fuck = []
@@ -33,4 +33,4 @@ def numbers(count):
         print(f"Now i is : {i}")
 
 
-numbers(count)
+number(count)

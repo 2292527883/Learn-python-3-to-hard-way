@@ -1,5 +1,4 @@
-a = "fuck you !"
-print(a)
-a = 'mother'
-
-print(f"I want to fuck you {a}")
+file = open(
+    "c:/Users/Nightwatchman/OneDrive - clannad/Learn-python-3-to-hard-way/ex22/ex22.txt", encoding="utf-8")
+file.read()
+print(file)
