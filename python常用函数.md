@@ -23,6 +23,14 @@
     - [4.14. count():用于统计字符串里摸个字符出现的次数,可选参数为在字符串搜索的的开始和结束位置.](#414-count用于统计字符串里摸个字符出现的次数可选参数为在字符串搜索的的开始和结束位置)
     - [4.15. replace():把字符串中old字符串替换成new字符串,如果指定第三个max参数,则替换不超过max次](#415-replace把字符串中old字符串替换成new字符串如果指定第三个max参数则替换不超过max次)
     - [4.16. try-except方法:](#416-try-except方法)
+    - [4.17. 类相关函数:](#417-类相关函数)
+        - [4.17.1. issubclass: 检测一个类是否是另一个类的子类](#4171-issubclass-检测一个类是否是另一个类的子类)
+        - [4.17.2. isinstance:检测一个对象是否是一个类的实例](#4172-isinstance检测一个对象是否是一个类的实例)
+        - [4.17.3. hasattr:检测一个对象是否有成员xxx](#4173-hasattr检测一个对象是否有成员xxx)
+        - [4.17.4. getattr():返回一个对象属性值](#4174-getattr返回一个对象属性值)
+        - [4.17.5. setattr():返回一个对象属性值](#4175-setattr返回一个对象属性值)
+        - [4.17.6. dekattr():用于删除属性](#4176-dekattr用于删除属性)
+        - [4.17.7. dir():获取对象的成员列表](#4177-dir获取对象的成员列表)
 
 <!-- /TOC -->
 # 1. 打印占位和获取用户输入
@@ -217,3 +225,122 @@ str.capitalize() :  This is string example from runoob....wow!!!
 - try:运行可能发生错误的语句
         如果出错,返回except的语句
 
+## 4.17. 类相关函数:
+### 4.17.1. issubclass: 检测一个类是否是另一个类的子类
+- 语法: issubclasss(class,classinfo)
+- 返回值:如果classs是classinfo的子类返回True,否则返回false
+
+### 4.17.2. isinstance:检测一个对象是否是一个类的实例
+```
+sinstance() 与 type() 区别：
+
+type() 不会认为子类是一种父类类型，不考虑继承关系。
+
+isinstance() 会认为子类是一种父类类型，考虑继承关系。
+
+如果要判断两个类型是否相同推荐使用 isinstance()。
+```
+- 语法:isinstance(object,classinfo)
+- 参数:
+        object:实例对象
+        classsinfo:可以是直接或间接类名
+- 返回值:如果对象的类型与classinfo的类型相同,返回True,否则返回False
+- 实例:
+```
+>>>a = 2
+>>> isinstance (a,int)
+True
+>>> isinstance (a,str)
+False
+>>> isinstance (a,(str,int,list)) # 是元组中的一个返回 True
+True
+```
+- type()与isinstance()区别 :
+```
+class A:
+pass
+class B(A):
+pass
+isinstance(A(), A) # returns True
+type(A()) == A # returns True
+isinstance(B(), A) # returns True
+type(B()) == A # returns False
+```
+### 4.17.3. hasattr:检测一个对象是否有成员xxx
+- 语法:hasattr(object,name)<br>
+        - objcet:对象<br>
+        - name:字符串/属性名
+- 返回值:对象有属性返回True,否则返回Flase
+### 4.17.4. getattr():返回一个对象属性值
+- 语法:getarttr(object,name[,default])
+- objcet:对象
+name:字符串/属性名
+default:默认返回值,如果不提供该参数,在没有对应属性时,触发AttributeErrpr
+
+- 返回值:返回对象属性值
+- 实例:
+```
+>>>class A(object):
+... bar = 1
+...
+>>> a = A()
+>>> getattr(a, 'bar') # 获取属性 bar 值
+1
+>>> getattr(a, 'bar2') # 属性 bar2 不存在，触发异常
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+AttributeError: 'A' object has no attribute 'bar2'
+>>> getattr(a, 'bar2', 3) # 属性 bar2 不存在，但设置了默认值
+3
+>>>
+```
+### 4.17.5. setattr():返回一个对象属性值
+- 语法:setarttr(object,name,value)
+- 参数:<br>
+        objcet:对象<br>
+        name:字符串/属性名
+        value: 属性值。
+
+
+- 返回值:无
+- 实例:<br>
+以下实例展示了 setattr() 函数的使用方法：<br>
+对已存在的属性进行赋值：
+```
+>>>class A(object):
+... bar = 1
+...
+>>> a = A()
+>>> getattr(a, 'bar') # 获取属性 bar 值
+1
+>>> setattr(a, 'bar', 5) # 设置属性 bar 值
+>>> a.bar
+5
+```
+如果属性不存在会创建一个新的对象属性,并对属性赋值
+```
+>>>class A():
+... name = "runoob"
+...
+>>> a = A()
+>>> setattr(a, "age", 28)
+>>> print(a.age)
+28
+>>>
+```
+
+### 4.17.6. dekattr():用于删除属性
+- 语法:
+delattr(class,name)
+- 返回值:无
+### 4.17.7. dir():获取对象的成员列表
+- 语法:dir([object])
+- 返回值:返回模块的属性列表
+实例:
+```
+>>>dir() # 获得当前模块的属性列表
+['__builtins__', '__doc__', '__name__', '__package__', 'arr', 'myslice']
+>>> dir([ ]) # 查看列表的方法
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>>
+```

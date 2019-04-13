@@ -133,7 +133,7 @@ class Laser_Weapon_Armory(scene):
              the lock closes forever and you can;t get the bomb , the
              code is 3 digits
             """))
-        code = 100  # f"{randint(1,9)}{randint(1,9)}{randint(1,9)}"
+        code = 100  # {randint(1, 9)}{randint(1, 9)}{randint(1, 9)}
         guess = input("[keypad]>")
         guesses = 0
         guess = int(guess)
@@ -213,7 +213,7 @@ class Escape_Pod(scene):
         guess = input("[pod #]>")
         guess = int(guess)
         if guess != good_pod:
-            print(f(dedent("""
+            print((dedent(f"""
             you jump into pod {guess} and hit the eject button,
             the bod esscapes out into the void of space ,then
             implodes as the hull ruptures ,crusshing your body
