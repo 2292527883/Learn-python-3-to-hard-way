@@ -1,4 +1,3 @@
-记录并整理python基础的常用函数
 <!-- TOC -->
 
 - [1. 打印占位和获取用户输入](#1-打印占位和获取用户输入)
@@ -31,8 +30,33 @@
         - [4.17.5. setattr():返回一个对象属性值](#4175-setattr返回一个对象属性值)
         - [4.17.6. dekattr():用于删除属性](#4176-dekattr用于删除属性)
         - [4.17.7. dir():获取对象的成员列表](#4177-dir获取对象的成员列表)
+    - [4.18. 类的成员描述符(property方法):在类中对类的成员属性进行相关操作而创建的一种方式](#418-类的成员描述符property方法在类中对类的成员属性进行相关操作而创建的一种方式)
+        - [4.18.1. 使用类实现描述器](#4181-使用类实现描述器)
+        - [4.18.2. 使用属性修饰符](#4182-使用属性修饰符)
+        - [4.18.3. 使用property函数](#4183-使用property函数)
+    - [4.19. 类的内置属性:](#419-类的内置属性)
+    - [4.20. 类的常用魔术方法:](#420-类的常用魔术方法)
+        - [4.20.1. __init__ : 构造函数:不需要特殊调用,实例化时自动调用](#4201-__init__--构造函数不需要特殊调用实例化时自动调用)
+        - [4.20.2. __new__:对象是实例化方法,此魔术方法较特殊,一般不需要使用](#4202-__new__对象是实例化方法此魔术方法较特殊一般不需要使用)
+        - [4.20.3. "__call__":当对象作函数使用是触发](#4203-__call__当对象作函数使用是触发)
+        - [4.20.4. __str__:当对象被当做字符串时调用,返回一个字符串](#4204-__str__当对象被当做字符串时调用返回一个字符串)
+        - [4.20.5. __repr__:返回字符串,同__str__](#4205-__repr__返回字符串同__str__)
+    - [4.21. 属性操作相关:](#421-属性操作相关)
+        - [4.21.1. __getattr__:访问一个不存在的属性触发:](#4211-__getattr__访问一个不存在的属性触发)
+        - [4.21.2. __setattr__ : 对成员属性进行设置时触发](#4212-__setattr__--对成员属性进行设置时触发)
+    - [4.22. 运算类相关魔术方法:](#422-运算类相关魔术方法)
+        - [4.22.1. __gt__:进行大于判断时触发的函数](#4221-__gt__进行大于判断时触发的函数)
+    - [4.23. 类和对象的三种方法](#423-类和对象的三种方法)
+    - [4.24. 属性的三种方法:](#424-属性的三种方法)
+    - [抽象类:](#抽象类)
+    - [自定义类:类其实是一个类定义和各种方法的自由组合](#自定义类类其实是一个类定义和各种方法的自由组合)
+        - [自己组装一个类:](#自己组装一个类)
+        - [用type造一个类](#用type造一个类)
+        - [元类的实例:](#元类的实例)
 
 <!-- /TOC -->
+记录并整理python基础的常用函数
+
 # 1. 打印占位和获取用户输入
 ## 1.1. input()
 - 获取用户输入
@@ -340,7 +364,407 @@ delattr(class,name)
 ```
 >>>dir() # 获得当前模块的属性列表
 ['__builtins__', '__doc__', '__name__', '__package__', 'arr', 'myslice']
->>> dir([ ]) # 查看列表的方法
+ dir([ ]) # 查看列表的方法
 ['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__delslice__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__setslice__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
->>>
+
+```
+## 4.18. 类的成员描述符(property方法):在类中对类的成员属性进行相关操作而创建的一种方式
+
+* 类的成员描述符是为了在类中对类的成员属性进行相关操作而创建的一种方式
+        - get:获取属性的操作
+        - set：修改或添加水属性操作
+        - delete：删除属性操作
+* 如果想使用类的成员描述符，大概有三种方法
+### 4.18.1. 使用类实现描述器
+    * __get__
+    * __set__
+    * __del__
+```
+实例:
+class Student:
+    def __init__(self):
+        pass
+
+
+    def __get__(self):
+        return self.age
+    def __set__(self,age):
+        if isinstance(age,int) and  0<age<100:
+            self.age=age
+        else:
+            print("请输入合法的年龄")
+
+stu=Student()
+
+stu.set(110)  #请输入合法的年龄
+
+stu.set(10)
+
+print(stu.get()) #10
+
+
+```
+### 4.18.2. 使用属性修饰符
+ * @property
+      * @porperty
+      * @porperty.setter
+      * @porperty,deleter
+      * 实例:
+```
+# ####定义####
+class Goods(object):
+    
+    @property
+    def price(self):
+        print("@property")
+        
+    @price.setter
+    def price(self, value):
+        print("@peice.setter")
+        print(value)
+        
+    @price.deleter
+    def price(self):
+        print('@price.deleter')
+######调用#####
+obj = Goods()
+# 自动执行@property修饰的price方法，并获取方法的返回值
+obj.price
+# 自动执行 @price.setter修饰的price方法，并将123赋值给方法的参数
+obj.price = 123
+# 自动执行@price.delete修饰的price方法
+del obj.price     
+```
+### 4.18.3. 使用property函数
+* property(fget,fset,fdel,doc)
+  * 参数:
+                fget -- 获取属性值的函数
+                fset -- 设置属性值的函数
+                fdel -- 删除属性值函数
+                doc -- 属性描述信息
+```
+实例:
+class c(object):
+        def __init__(self):
+                self.x=None
+        def fget(self):
+                return self._x
+        def fset(self,value):
+                self._x=value
+        def fdel(self):
+                del self._x
+        x = property(fget,fset,fdel,"This is porperty's")
+```
+* 在c实例化时,x=c(),c.x即将出发getter,c.x=value出发setter,del c.x将触发delete
+## 4.19. 类的内置属性:
+* 格式:obj.__somethong__
+* __dict__:以字典方式显示类的成员组成
+* __doc__:获取类的文档信息
+* __name__:获取类的名称,如果在模块中使用,获取模块的名称
+* __bases__:获取某个类的父类,以元组的方式现实
+* 说明文档的格式(__doc__)
+```
+class some(object):
+        '''
+        somthing
+        '''
+        def __init__(self):
+                pass
+
+```
+print(some.__doc__)
+
+```
+结果:
+something
+```
+## 4.20. 类的常用魔术方法:
+* 魔术方法就是不需要认为调用的方法,基本是在特定的时刻自动触发
+* 统一特征:方法名被前后两个下划线包裹
+### 4.20.1. __init__ : 构造函数:不需要特殊调用,实例化时自动调用 
+### 4.20.2. __new__:对象是实例化方法,此魔术方法较特殊,一般不需要使用
+### 4.20.3. "__call__":当对象作函数使用是触发
+```
+实例:
+class A():
+        def __init__(self):
+                pass
+        def __call__(self):
+                print("hello~")
+a= A()
+a()
+```
+```
+结果:
+hello~
+```
+### 4.20.4. __str__:当对象被当做字符串时调用,返回一个字符串
+实例:
+```
+class A():
+        def __init__(self):
+                pass
+        def __str__(self):
+                return "somebody in there"
+a= A()
+print(a)
+```
+结果:
+```
+somebody in there
+```
+### 4.20.5. __repr__:返回字符串,同__str__
+* 语法:repr(object)
+* 返回值:返回一个对象的string格式
+* 实例:
+```
+class MyClass() :
+    def __str__(self) :
+        return "我是MyClass的一个实例"
+    def __repr__(self) :
+        return "这回连print都省了"
+ 
+a=MyClass()
+```
+结果:
+
+```
+>>> print(a)
+我是MyClass的一个实例
+>>> a
+这回连print都省了
+>>> 
+```
+## 4.21. 属性操作相关:
+### 4.21.1. __getattr__:访问一个不存在的属性触发:
+实例:
+```
+Class A():
+        name="Noname"
+        age = 18
+        def __getattr__(self,name):
+                print("没找到")
+a=A()
+print(a.addr)
+```
+结果:
+```
+没找到
+```
+* 这里会多返回一个None,原因不知
+* 在csdn找到可能原因:
+> 这是因为你定义def red_2():的时候没有显示的使用return 语句，python 解释器会隐式地返回一个 return None
+
+来源:[关于python def函数的打印带None的问题 ](https://bbs.csdn.net/topics/392188067)
+
+### 4.21.2. __setattr__ : 对成员属性进行设置时触发
+* 语法:
+setattr(object,name,value)
+* 参数：
+        object--对象
+name--字符串，对象属性
+value--属性值
+* 作用:进行属性设置时经行验证和修改
+* 注意:在该方法中不能对属性直接进行赋值操作,否则死循环
+* 实例:
+```
+class A():
+        def __init__(self):
+                pass
+        def __setattr__(self,name,value):
+                print("设置属性:{0}".format(name))
+                self.name=value
+                # 这里又设置一遍属性,会无限递归
+                # 为了避免死循环,规定统一调用父类魔法函数
+                super().__setattr__(name.value)
+a= A()
+print(p.__dict__)
+p.age=18
+```
+## 4.22. 运算类相关魔术方法:
+### 4.22.1. __gt__:进行大于判断时触发的函数
+* 参数:
+self
+第二个参数时第二个对象
+返回值可以时任意值,推荐返回布尔值
+* 实例:
+  
+```
+class A():
+        def __init__(self,name):
+                self._name=name
+        def __gt__(self,obj):
+                print("{0}会比{1}大吗?".format(self.name,obj.name))
+                return self._name > obj._name
+a= A()
+a1=A("one")
+a2=A("tow")
+print(a1>a2)
+```
+## 4.23. 类和对象的三种方法
+* 实例方法
+        需要实例化对象才能使用的方法,使用过程中可能需要戒指对象的其他对象的方法完成
+* 静态方法
+        不需要实例化,通过类方法直接访问
+* 类方法
+        不需要实例化
+* 实例:
+```
+class A():
+        #实例方法
+        def eat(self):
+                print(self)
+                print("Eating....")
+        #类方法:
+        @classmethod
+        def play(cls):
+                print("Playing)
+        #静态方法:
+        #不需要第一个参赛数表示自身或者类
+        @staticmethod
+        def say():
+                print("saying")
+
+#实例方法:
+yueyu=A()
+yueyue.eat()
+#类方法:
+A.play()
+yueyue.play()
+#静态方法:
+A.say()
+yueyue.say()
+```
+## 4.24. 属性的三种方法:
+1. 赋值:
+2. 读取
+3. 三处
+* 实例:
+```
+class A():
+        name="Name"
+        pass
+a=A()
+a.name="someboday"
+print(a)
+del a.name
+```
+## 抽象类:
+* 抽象方法:没有具体实现内容的方法成为抽象方法
+* 抽象方法的主要意义是规范了子类的行为和接口
+* 抽象类的使用主要借助abc模块
+  import abc
+* 抽象类:包含抽象方法的类叫抽象类,通常称为ABC类
+- 实例:
+```
+import abc
+#生命一个类并制定当前类的元类
+class Human(metaclass=abc.ABC.meta):
+        #定义一个抽象方法
+        @abc.abstractmethod
+        def smokiing(self):
+                pass
+        #定义类抽象方法
+        @abc.abstractclassmethod
+        def drink():
+                pas
+        # 定义静态抽象方法
+        @ abc.abstractstaticmethod
+        def play():
+                pass
+        def sleep():
+        print("sleeping....")
+```
+* 抽象类的使用:
+    * 抽象类可以包含抽象方法,也可以包含具体方法
+    * 抽象类中可以有方法也可以有属性
+    * 抽象类不能直接实例化
+    * 必须继承才可以使用,并且继承的子类必须实现继承来的抽象方法
+    * 如果子类没有实现所有继承的抽象方法,子类也不能被实例化
+    * 抽象类主要作用是设定类的标准,以便于开发时具有统一的规范
+## 自定义类:类其实是一个类定义和各种方法的自由组合
+* 可以自定义类和函数,然后通过类直接赋值
+* 可以借助MethodType实现
+* 借助于type
+* 利用元类实现 - MetaClass
+  * 元类是类
+  * 被用来创造别的类
+### 自己组装一个类:
+``` 
+class A ():
+    pass
+def say(self):
+    print("Saying......)
+
+a.say = say
+
+a= A()
+
+a.say()
+
+
+--> saying......
+
+```
+* 实例2
+```
+class A():
+    pas
+def say(self):
+    print("saying.......")
+    
+a=A()
+a.say=say
+s.say()
+# 报错
+# 可以绑定类,不能绑定实例
+```
+解决方法:
+```
+from types import Methodtype
+
+class A():
+    pas
+def say(self):
+    print("saying.......")
+    
+a=A()
+a.say=methodType(say,A)
+# 参数: 实例,类
+s.say()
+```
+### 用type造一个类
+```
+#定义类该剧有的成员函数
+def say(self):
+    print("saying....")
+def talf(self):
+    print("Talking...")
+# 组装类参数:
+# type(name,bases,dict)->a new type
+# 类名称,父类,组成的各种方法和成员(字典类型)
+A=type("Aname",(object,),{"class_say:say","class_talk":talk})
+# 然后可以像正常访问一样使用类
+a=A()
+a.talk()
+```
+### 元类的实例:
+
+```
+# 元类的写法是固定的,必须继承于type,结尾约定为Metclasss
+class someMetclass(type)
+    # 注意以下写法
+    def __new__(cls,name,bases,attrs):
+        ...
+        # 自己的业务处理
+        attrs["id"]="123456"
+        attrs["addr"]="something"
+        ...
+        return type.__new__(cls,name,bases,attrss)
+# 元类定义完就可以使用,注意使用写法
+class Teacher(object,metaclass = someMetclasss):
+    pass
+t=teacher()
+t.id
+--> "123456"
 ```

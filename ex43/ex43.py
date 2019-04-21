@@ -83,7 +83,7 @@ class Central_Corridor(scene):
 			You're running down the central corridor to the Weapons
 			Armory when a Gothon jumps out , red scaly skin, dark grimy
 			filled body . He's blocking the door to the Armory and
-			about topull a weapon blast you.
+			about topull a weapon blast you.cd
             """))
         action = input(">")
         if action == "shoot":
