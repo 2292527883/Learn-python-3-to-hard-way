@@ -1,4 +1,5 @@
 from sys import argv
+
 print("How old are you?", end=' ')
 age = input(">")
 print("How tall are you?", end=' ')
