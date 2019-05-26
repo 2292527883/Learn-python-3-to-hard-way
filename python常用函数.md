@@ -658,7 +658,7 @@ del a.name
 - 实例:
 ```
 import abc
-#生命一个类并制定当前类的元类
+#声明一个类并制定当前类的元类
 class Human(metaclass=abc.ABC.meta):
         #定义一个抽象方法
         @abc.abstractmethod
